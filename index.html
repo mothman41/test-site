@@ -216,10 +216,12 @@
   .bento-cell li{ font-size:13.5px; color:var(--steel); display:flex; align-items:baseline; gap:10px; }
   .bento-cell li::before{ content:"—"; color:var(--blue-deep); }
   .bento-feature{ background:var(--blue-deep); color:#fff; }
+  .bento-feature:hover{ background:var(--blue) !important; }
   .bento-feature h3,.bento-feature p,.bento-feature .num{ color:#fff; }
   .bento-feature p{ color:rgba(255,255,255,0.72); }
   .bento-feature .num{ color:var(--blue-light); }
   .bento-emergency{ background:var(--red); color:#fff; }
+  .bento-emergency:hover{ background:#d93a25 !important; }
   .bento-emergency h3,.bento-emergency p,.bento-emergency .num{ color:#fff; }
   .bento-emergency p{ color:rgba(255,255,255,0.78); }
   .bento-emergency .num{ color:#FFD9D2; }
@@ -616,7 +618,7 @@
     </div>
     <p class="areas-text">We cover Whinmoor, Headingley, Horsforth, Garforth, Armley, Hyde Park, Adel, Weetwood, Meanwood, Cookridge, Bramley, Bramhope, West Park, Rodley, Stanningley, Pudsey, Morley, Farnley, Farsley, Crossgates, Seacroft, Hunslet, Rothwell, Chapel Allerton, Moortown, Tinshill, Churwell, Beeston, Kirkstall — in fact, all Leeds areas are covered.</p>
     <div class="foot-bottom">
-      <span>Disclaimer: This is an unauthorized, private design concept created for demonstration purposes only. It is not affiliated with any active business.</span>
+      <span>This is a private, unauthorized design concept created for demonstration purposes only. It is not affiliated with any active business.</span>
       <span>Fully Insured · No Call-Out Charge</span>
     </div>
   </div>
@@ -687,7 +689,17 @@
   }
   rafId = requestAnimationFrame(tick);
 
+  // Firefox / no-GPU fallback: if backdrop-filter is unsupported,
+  // swap to a tinted radial gradient so the lens still shows something
+  if (!CSS.supports('backdrop-filter', 'blur(1px)') &&
+      !CSS.supports('-webkit-backdrop-filter', 'blur(1px)')) {
+    lens.style.backdropFilter = 'none';
+    lens.style.background = 'radial-gradient(circle, rgba(13,70,161,0.28) 0%, rgba(66,165,245,0.10) 60%, transparent 82%)';
+    lens.style.boxShadow = '0 0 0 1.5px rgba(13,70,161,0.22), 0 24px 60px rgba(10,26,43,0.18)';
+  }
+
   window.addEventListener('pointermove', onMove, { passive: true });
+  window.addEventListener('mousemove', onMove, { passive: true });
   window.addEventListener('pointerleave', () => {
     active = false;
     lens.classList.remove('is-active');
