@@ -1,762 +1,1006 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Leeds Plumber UK — 24 Hour Emergency Plumbing & Drainage</title>
-<meta name="description" content="24 hour emergency plumbers in Leeds. No call-out charge, engineer within 1 hour. Plumbing repairs, drain jetting, bathrooms, leaks. Fully insured." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best Landscape & Gardening Surrey | Design · Build · Maintain</title>
+  <meta name="description" content="Surrey's premium landscaping & gardening specialists. Patios, driveways, decking, fencing, turfing, artificial grass and garden maintenance across Surrey. Fully insured. Free quotes.">
+  <meta name="keywords" content="landscaping Surrey, garden maintenance Surrey, patios Surrey, decking Surrey, turfing Surrey, fencing Surrey, Best Landscape Surrey">
+  <meta name="author" content="Best Landscape & Gardening Surrey">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Best Landscape & Gardening Surrey">
+  <meta property="og:description" content="Design, build and maintain stunning outdoor spaces across Surrey. 10+ years experience, fully insured, free quotes.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bestlandscape.co.uk">
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<style>
-  /* ============================================================
-     DESIGN TOKENS — extracted directly from the client's original
-     Wix build (Leeds Plumber UK / John McGinty Plumbing Services).
-     Source colours found in their compiled CSS:
-       .primary-text { color:#0d46a1 }   -> deep "stop-tap" blue
-       .red-text     { color:#f7462f }   -> emergency / call-now red
-       .green-text   { color:#2ec685 }   -> "no call-out charge" green
-       body font: Poppins, sans-serif
-       display font seen on headings: 'Bai Jamjuree'
-     These are elevated, not replaced.
-     ============================================================ */
-  :root{
-    --ink:        #0A1A2B;   /* near-black navy, deepened from their #162d3d */
-    --paper:      #F5F7FA;   /* cool engineered white, replaces flat #fff */
-    --paper-dim:  #EAEEF3;
-    --blue-deep:  #0d46a1;   /* lifted verbatim — their primary-text blue */
-    --blue:       #1976d2;   /* their secondary blue, used for mid-tones */
-    --blue-light: #42a5f5;   /* their accent blue, used sparingly for glow */
-    --red:        #f7462f;   /* lifted verbatim — their "red-text" CTA colour */
-    --green:      #2ec685;   /* lifted verbatim — their "green-text" colour */
-    --steel:      #577083;   /* refined from their muted body grey #7d8891 */
-    --line:       rgba(10,26,43,0.10);
+  <link rel="stylesheet" href="css/styles.css">
 
-    --font-display: 'Bai Jamjuree', sans-serif;
-    --font-body:    'Poppins', sans-serif;
-
-    --container: 1240px;
-  }
-
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  body{
-    margin:0; background:var(--paper); color:var(--ink);
-    font-family:var(--font-body); font-weight:400; overflow-x:hidden;
-  }
-  ::selection{ background:var(--blue-light); color:#fff; }
-  img{ max-width:100%; display:block; }
-  a{ color:inherit; text-decoration:none; }
-
-  .wrap{ max-width:var(--container); margin:0 auto; padding:0 32px; }
-  @media (max-width:640px){ .wrap{ padding:0 20px; } }
-
-  h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; margin:0; color:var(--ink); letter-spacing:-0.01em; }
-  .eyebrow{
-    font-family:var(--font-body); font-weight:600; font-size:12.5px;
-    letter-spacing:.18em; text-transform:uppercase; color:var(--blue-deep);
-    display:flex; align-items:center; gap:10px;
-  }
-  .eyebrow::before{ content:""; width:28px; height:1px; background:var(--red); display:inline-block; }
-  p{ color:var(--steel); line-height:1.75; font-weight:300; }
-
-  /* ============================================================
-     AMBIENT CURSOR LENS — GPU-accelerated, transform-only via
-     GSAP quickTo. A frosted "glass lens" that magnifies + blurs
-     whatever sits beneath it (the pressure-line grid), and zooms
-     in/out based on cursor velocity — like inspecting a pipe run
-     through a loupe. Distinct from a flat glow: real backdrop
-     blur + saturation + a scale-driven zoom pulse on a brand-
-     coloured ring.
-     ============================================================ */
-  #lens{
-    position:fixed; top:0; left:0; width:260px; height:260px;
-    margin-left:-130px; margin-top:-130px; border-radius:50%;
-    pointer-events:none; z-index:1; opacity:0;
-    will-change:transform, opacity;
-    backdrop-filter: blur(7px) saturate(1.7) contrast(1.1);
-    -webkit-backdrop-filter: blur(7px) saturate(1.7) contrast(1.1);
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,0.5) inset,
-      0 0 0 1.5px rgba(13,70,161,0.18),
-      0 24px 60px rgba(10,26,43,0.22);
-    transition: opacity .5s ease;
-    overflow:hidden;
-  }
-  #lens.is-active{ opacity:1; }
-  #lens::before{
-    content:""; position:absolute; inset:0; border-radius:50%;
-    background: radial-gradient(circle at 32% 28%, rgba(255,255,255,0.4) 0%, rgba(66,165,245,0.10) 55%, transparent 78%);
-  }
-  #lens-ring{
-    position:absolute; top:50%; left:50%; width:300px; height:300px;
-    margin:-150px 0 0 -150px; border-radius:50%;
-    border:1px solid rgba(247,70,47,0.32);
-    pointer-events:none; z-index:1; opacity:0;
-    will-change: transform, opacity;
-    transition: opacity .5s ease;
-  }
-  #lens-ring.is-active{ opacity:1; }
-
-  .grid-field{
-    position:absolute; inset:0;
-    background-image:
-      linear-gradient(rgba(10,26,43,0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(10,26,43,0.07) 1px, transparent 1px);
-    background-size:34px 34px;
-    pointer-events:none;
-  }
-
-  /* ============================================================
-     NAV
-     ============================================================ */
-  header{
-    position:fixed; top:0; left:0; right:0; z-index:50;
-    background:rgba(245,247,250,0.8); backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{ display:flex; align-items:center; justify-content:space-between; height:84px; }
-  .logo{ font-family:var(--font-display); font-size:21px; font-weight:700; display:flex; flex-direction:column; line-height:1.05; }
-  .logo span{ font-family:var(--font-body); font-size:10px; font-weight:500; letter-spacing:.16em; color:var(--red); text-transform:uppercase; margin-top:4px; }
-
-  nav.links{ display:flex; gap:38px; }
-  @media (max-width:920px){ nav.links{ display:none; } }
-  .nav-link{ position:relative; font-size:13px; font-weight:500; letter-spacing:.04em; text-transform:uppercase; padding:4px 0; }
-  .nav-link::after{
-    content:""; position:absolute; left:0; bottom:-2px; width:100%; height:1px;
-    background:var(--blue-deep); transform:scaleX(0); transform-origin:right;
-    transition:transform .35s cubic-bezier(.22,1,.36,1);
-  }
-  .nav-link:hover::after{ transform:scaleX(1); transform-origin:left; }
-
-  .nav-cta{
-    background:var(--red); color:#fff; padding:13px 24px; font-size:12.5px; font-weight:700;
-    letter-spacing:.06em; text-transform:uppercase; border-radius:999px; display:flex; align-items:center; gap:8px;
-  }
-
-  .magnetic{ display:inline-block; position:relative; }
-  .btn-primary{
-    background:var(--blue-deep); color:#fff; padding:18px 36px; border-radius:999px;
-    font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
-    display:inline-flex; align-items:center; gap:12px;
-  }
-  .btn-primary svg{ width:14px; height:14px; transition:transform .3s ease; }
-  .btn-primary:hover svg{ transform:translateX(4px); }
-  .btn-red{ background:var(--red); }
-  .btn-ghost{
-    border:1px solid var(--ink); padding:17px 34px; border-radius:999px;
-    font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
-  }
-
-  /* ============================================================
-     HERO
-     ============================================================ */
-  .hero{ position:relative; padding:200px 0 110px; overflow:hidden; }
-  .hero-grid{ display:grid; grid-template-columns:1.5fr 1fr; gap:60px; align-items:end; }
-  @media (max-width:920px){ .hero-grid{ grid-template-columns:1fr; } }
-
-  .hero h1{ font-size:clamp(46px,6.8vw,92px); line-height:0.98; }
-  .hero h1 em{ font-style:normal; color:var(--blue-deep); }
-  .hero h1 .accent{ color:var(--red); }
-  .hero-line{ overflow:hidden; display:block; }
-  .hero-line span{ display:inline-block; will-change:transform; }
-
-  .hero-sub{ max-width:380px; padding-bottom:6px; }
-  .hero-sub p{ font-size:16.5px; }
-
-  .hero-stats{ margin-top:90px; display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); }
-  @media (max-width:760px){ .hero-stats{ grid-template-columns:repeat(2,1fr); } }
-  .stat{ padding:28px 24px 0 0; border-right:1px solid var(--line); }
-  .stat:last-child{ border-right:none; }
-  .stat b{ font-family:var(--font-display); font-size:38px; font-weight:700; color:var(--ink); display:block; }
-  .stat span{ font-size:12px; color:var(--steel); letter-spacing:.03em; }
-
-  .hero-tag{
-    position:absolute; right:32px; top:210px; writing-mode:vertical-rl;
-    font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--steel);
-  }
-  @media (max-width:920px){ .hero-tag{ display:none; } }
-
-  /* MARQUEE */
-  .marquee-wrap{
-    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    background:var(--ink); color:#fff; overflow:hidden; padding:18px 0;
-  }
-  .marquee{ display:flex; white-space:nowrap; width:max-content; gap:48px; }
-  .marquee span{ font-family:var(--font-display); font-size:21px; color:rgba(255,255,255,0.85); display:flex; align-items:center; gap:48px; font-weight:500; }
-  .marquee span i{ font-style:normal; color:var(--red); font-size:12px; }
-
-  section{ position:relative; z-index:2; padding:130px 0; }
-  .sec-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:40px; margin-bottom:64px; }
-  @media (max-width:760px){ .sec-head{ flex-direction:column; align-items:flex-start; gap:20px; } }
-  .sec-head h2{ font-size:clamp(34px,4.4vw,54px); line-height:1.05; max-width:640px; }
-  .sec-head p{ max-width:320px; }
-
-  /* ============================================================
-     BENTO GRID — services
-     ============================================================ */
-  .bento{ display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
-  .bento-cell{ background:var(--paper); padding:40px; position:relative; overflow:hidden; transition:background .4s ease; }
-  .bento-cell:hover{ background:var(--paper-dim); }
-  .bento-cell.span-4{ grid-column:span 4; }
-  .bento-cell.span-2{ grid-column:span 2; }
-  .bento-cell.span-3{ grid-column:span 3; }
-  @media (max-width:860px){
-    .bento{ grid-template-columns:1fr; }
-    .bento-cell.span-4,.bento-cell.span-2,.bento-cell.span-3{ grid-column:span 1; }
-  }
-  .bento-cell .num{ font-family:var(--font-display); font-size:13px; color:var(--red); letter-spacing:.1em; }
-  .bento-cell h3{ font-size:26px; margin-top:18px; margin-bottom:12px; }
-  .bento-cell ul{ list-style:none; padding:0; margin:18px 0 0; display:grid; gap:9px; }
-  .bento-cell li{ font-size:13.5px; color:var(--steel); display:flex; align-items:baseline; gap:10px; }
-  .bento-cell li::before{ content:"—"; color:var(--blue-deep); }
-  .bento-feature{ background:var(--blue-deep); color:#fff; }
-  .bento-feature:hover{ background:var(--blue) !important; }
-  .bento-feature h3,.bento-feature p,.bento-feature .num{ color:#fff; }
-  .bento-feature p{ color:rgba(255,255,255,0.72); }
-  .bento-feature .num{ color:var(--blue-light); }
-  .bento-emergency{ background:var(--red); color:#fff; }
-  .bento-emergency:hover{ background:#d93a25 !important; }
-  .bento-emergency h3,.bento-emergency p,.bento-emergency .num{ color:#fff; }
-  .bento-emergency p{ color:rgba(255,255,255,0.78); }
-  .bento-emergency .num{ color:#FFD9D2; }
-
-  /* ============================================================
-     ABOUT — asymmetric editorial
-     ============================================================ */
-  .about{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:90px; align-items:flex-start; }
-  @media (max-width:920px){ .about{ grid-template-columns:1fr; gap:50px; } }
-  .about-figure{
-    position:relative; aspect-ratio:4/5; border-radius:4px; overflow:hidden;
-    background:linear-gradient(160deg, var(--blue) 0%, var(--blue-deep) 100%);
-  }
-  .about-figure::after{
-    content:"STOP TAP READY"; position:absolute; bottom:24px; left:24px; color:#fff;
-    font-family:var(--font-display); font-size:24px; opacity:.92;
-  }
-  .about-figure .badge{
-    position:absolute; top:24px; right:24px; background:var(--green); color:#06291d;
-    font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
-    padding:9px 14px; border-radius:999px;
-  }
-  .about-copy h2{ font-size:clamp(32px,4vw,48px); margin-bottom:28px; }
-  .about-copy p + p{ margin-top:18px; }
-  .press{ margin-top:38px; padding:26px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); display:flex; gap:18px; align-items:center; }
-  .press b{ font-family:var(--font-display); font-size:17px; color:var(--blue-deep); }
-  .press span{ font-size:12.5px; color:var(--steel); }
-
-  /* ============================================================
-     EMERGENCY STEPS
-     ============================================================ */
-  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
-  @media (max-width:860px){ .steps{ grid-template-columns:1fr; } }
-  .step{ background:var(--paper); padding:40px; }
-  .step .num{ font-family:var(--font-display); font-size:44px; color:var(--blue-light); font-weight:700; }
-  .step h4{ font-size:19px; margin:14px 0 10px; }
-  .step p{ font-size:13.5px; }
-
-  /* ============================================================
-     PRICING / TRUST STRIP
-     ============================================================ */
-  .pricing{ background:var(--ink); color:#fff; border-radius:4px; padding:64px 56px; display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:40px; }
-  @media (max-width:800px){ .pricing{ grid-template-columns:1fr; padding:44px 28px; } }
-  .pricing .eyebrow{ color:var(--blue-light); }
-  .pricing .eyebrow::before{ background:var(--red); }
-  .pricing h2{ color:#fff; font-size:30px; margin:14px 0 18px; }
-  .price-card{ border-left:1px solid rgba(255,255,255,0.18); padding-left:28px; }
-  .price-card:first-child{ border-left:none; padding-left:0; }
-  .price-card b{ font-family:var(--font-display); font-size:34px; display:block; color:var(--green); }
-  .price-card span{ font-size:13px; color:rgba(255,255,255,0.65); display:block; margin-top:6px; }
-
-  /* ============================================================
-     CTA / CONTACT
-     ============================================================ */
-  .cta-band{
-    background:linear-gradient(135deg, var(--blue-deep) 0%, var(--ink) 100%);
-    color:#fff; border-radius:4px; padding:90px 60px; text-align:center; position:relative; overflow:hidden;
-  }
-  .cta-band h2{ color:#fff; font-size:clamp(36px,5vw,64px); max-width:760px; margin:0 auto 30px; }
-  .cta-band p{ color:rgba(255,255,255,0.72); max-width:460px; margin:0 auto 40px; }
-  .cta-band .btn-primary{ background:var(--red); color:#fff; }
-
-  /* CONTACT FORM */
-  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start; }
-  @media (max-width:860px){ .contact-grid{ grid-template-columns:1fr; gap:50px; } }
-  .info-row{ display:flex; gap:18px; padding:20px 0; border-bottom:1px solid var(--line); }
-  .info-row .ico{ width:38px; height:38px; border-radius:50%; background:var(--paper-dim); display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--blue-deep); }
-  .info-row h4{ font-size:14px; margin-bottom:4px; }
-  .info-row p{ font-size:13.5px; margin:0; }
-
-  form.contact-form{ display:grid; gap:18px; }
-  .contact-form input, .contact-form textarea{
-    width:100%; border:none; border-bottom:1px solid var(--line); background:transparent;
-    padding:14px 2px; font-family:var(--font-body); font-size:15px; color:var(--ink);
-    outline:none; transition:border-color .3s ease;
-  }
-  .contact-form input:focus, .contact-form textarea:focus{ border-color:var(--blue-deep); }
-  .contact-form textarea{ resize:vertical; min-height:110px; }
-  .contact-form button{
-    justify-self:start; margin-top:8px; background:var(--blue-deep); color:#fff; border:none;
-    padding:17px 34px; border-radius:999px; font-size:13px; font-weight:700; letter-spacing:.06em;
-    text-transform:uppercase; cursor:pointer;
-  }
-
-  /* FOOTER */
-  footer.site-footer{ padding:80px 0 40px; border-top:1px solid var(--line); }
-  .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:50px; }
-  @media (max-width:760px){ .foot-grid{ grid-template-columns:1fr 1fr; } }
-  .foot-grid h4{ font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--red); margin-bottom:18px; font-weight:600; }
-  .foot-grid ul{ list-style:none; padding:0; margin:0; display:grid; gap:10px; }
-  .foot-grid li a{ font-size:14px; color:var(--steel); }
-  .foot-grid li a:hover{ color:var(--blue-deep); }
-  .foot-bottom{ margin-top:70px; padding-top:26px; border-top:1px solid var(--line); display:flex; justify-content:space-between; font-size:12.5px; color:var(--steel); flex-wrap:wrap; gap:12px; }
-  .areas-text{ font-size:11.5px; color:var(--steel); opacity:.65; line-height:1.9; margin-top:18px; }
-
-  .reveal{ opacity:0; transform:translateY(28px); }
-
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    #lens, #lens-ring{ display:none; }
-  }
-</style>
+  <!-- Favicon placeholder -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%231B3B2A'/><text y='.9em' font-size='70' x='12'>🌿</text></svg>">
 </head>
 <body>
 
-<div id="lens"></div>
-<div id="lens-ring"></div>
+<!-- ═══ CUSTOM CURSOR ═══════════════════════════════════════ -->
+<div id="cursor-dot"  aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
 
-<!-- ============================================================
-     NAV
-============================================================ -->
-<header>
-  <div class="wrap nav">
-    <div class="logo">Leeds <span>Plumber.uk — 24hr Plumbing &amp; Drainage</span></div>
-    <nav class="links">
-      <a class="nav-link" href="#services">Services</a>
-      <a class="nav-link" href="#emergency">Emergency</a>
-      <a class="nav-link" href="#about">About</a>
-      <a class="nav-link" href="#contact">Contact</a>
-    </nav>
-    <a class="nav-cta magnetic" href="tel:01134182075">0113 418 2075</a>
-  </div>
-</header>
+<!-- ═══ NAVIGATION ══════════════════════════════════════════ -->
+<nav class="nav" id="main-nav" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav__inner">
 
-<!-- ============================================================
-     HERO
-============================================================ -->
-<section class="hero">
-  <div class="grid-field"></div>
-  <div class="wrap hero-grid">
-    <div>
-      <p class="eyebrow">Leeds &amp; surrounding areas · No call-out charge</p>
-      <h1 style="margin-top:22px;">
-        <span class="hero-line"><span>24 hour</span></span>
-        <span class="hero-line"><span><em>emergency</em> plumbers,</span></span>
-        <span class="hero-line"><span>no <span class="accent">fuss.</span></span></span>
-      </h1>
-    </div>
-    <div class="hero-sub">
-      <p>A Leeds-based plumbing company that gets the job done with a friendly plumber at very competitive prices. We only charge from arrival — there is no call-out charge.</p>
-      <div style="margin-top:28px; display:flex; gap:16px; flex-wrap:wrap;">
-        <a href="tel:01134182075" class="btn-primary btn-red magnetic">
-          Call 0113 418 2075
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a href="#contact" class="btn-ghost magnetic">Get a free quote</a>
+      <!-- Logo -->
+      <a href="index.html" class="nav__logo" aria-label="Best Landscape & Gardening Surrey — Home">
+        <div class="nav__logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" color="#C4A882">
+            <path d="M12 2a10 10 0 0 1 10 10c0 4-2 7-5 9"/>
+            <path d="M12 2C8 6 6 10 7 14c1 3 3 5 5 8"/>
+            <path d="M12 2c4 4 6 8 5 12-1 3-3 5-5 8"/>
+          </svg>
+        </div>
+        <span>Best Landscape<br><span>&amp; Gardening</span></span>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="nav__links" role="list">
+        <a href="index.html" class="nav__link" role="listitem">Home</a>
+
+        <div class="nav__link nav__link--dropdown" role="listitem" tabindex="0" aria-haspopup="true" aria-expanded="false">
+          Services
+          <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l4 4 4-4"/></svg>
+          <div class="nav__dropdown" role="menu">
+            <div class="nav__dropdown-grid">
+              <div class="nav__dropdown-col">
+                <h5>Landscaping</h5>
+                <a href="services.html#patios"          class="nav__dropdown-item" role="menuitem">Driveways &amp; Patios</a>
+                <a href="services.html#decking"         class="nav__dropdown-item" role="menuitem">Decking</a>
+                <a href="services.html#fencing"         class="nav__dropdown-item" role="menuitem">Fencing &amp; Gates</a>
+                <a href="services.html#artificial-grass" class="nav__dropdown-item" role="menuitem">Artificial Grass</a>
+                <a href="services.html#turfing"         class="nav__dropdown-item" role="menuitem">Turfing</a>
+                <a href="services.html#brickworks"      class="nav__dropdown-item" role="menuitem">Brickworks</a>
+                <a href="services.html#groundworks"     class="nav__dropdown-item" role="menuitem">Groundworks</a>
+              </div>
+              <div class="nav__dropdown-col">
+                <h5>Gardening</h5>
+                <a href="services.html#maintenance"     class="nav__dropdown-item" role="menuitem">Garden Maintenance</a>
+                <a href="services.html#hedge-cutting"   class="nav__dropdown-item" role="menuitem">Hedge Cutting</a>
+                <a href="services.html#lawn-mowing"     class="nav__dropdown-item" role="menuitem">Lawn Mowing</a>
+                <a href="services.html#lawn-care"       class="nav__dropdown-item" role="menuitem">Lawn Care</a>
+                <a href="services.html#tree-surgeon"    class="nav__dropdown-item" role="menuitem">Tree Surgeon</a>
+                <a href="services.html#planting"        class="nav__dropdown-item" role="menuitem">Planting</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="index.html#about"    class="nav__link" role="listitem">About</a>
+        <a href="index.html#coverage" class="nav__link" role="listitem">Coverage</a>
+        <a href="index.html#faq"      class="nav__link" role="listitem">FAQ</a>
       </div>
+
+      <!-- Actions -->
+      <div class="nav__actions">
+        <a href="tel:07471734798" class="nav__phone" aria-label="Call us on 07471 734798">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.0 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          07471 734798
+        </a>
+        <a href="contact.html" class="btn btn--stone btn--sm">Free Quote</a>
+      </div>
+
+      <!-- Hamburger -->
+      <button class="nav__hamburger" id="nav-hamburger" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+
     </div>
   </div>
+</nav>
 
-  <div class="wrap hero-stats">
-    <div class="stat"><b>1hr</b><span>Engineer arrival time, emergencies</span></div>
-    <div class="stat"><b>24/7</b><span>Operating 365 days a year</span></div>
-    <div class="stat"><b>£0</b><span>No call-out charge, ever</span></div>
-    <div class="stat"><b>100%</b><span>Fully insured engineers</span></div>
-  </div>
-
-  <div class="hero-tag">Jetting — Drain — Plumbing — Repairs</div>
-</section>
-
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee" id="marquee">
-    <span>Headingley <i>●</i> Horsforth <i>●</i> Garforth <i>●</i> Armley <i>●</i> Hyde Park <i>●</i> Adel <i>●</i> Weetwood <i>●</i> Meanwood <i>●</i> Pudsey <i>●</i> Morley <i>●</i></span>
-    <span>Headingley <i>●</i> Horsforth <i>●</i> Garforth <i>●</i> Armley <i>●</i> Hyde Park <i>●</i> Adel <i>●</i> Weetwood <i>●</i> Meanwood <i>●</i> Pudsey <i>●</i> Morley <i>●</i></span>
+<!-- ═══ MOBILE MENU ══════════════════════════════════════════ -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-label="Mobile navigation">
+  <nav class="mobile-menu__links">
+    <a href="index.html" class="mobile-menu__link">Home</a>
+    <a href="services.html" class="mobile-menu__link" data-toggle-sub="mob-services">Services ↓</a>
+    <div class="mobile-menu__sub" id="mob-services">
+      <a href="services.html#patios">Driveways &amp; Patios</a>
+      <a href="services.html#decking">Decking</a>
+      <a href="services.html#fencing">Fencing &amp; Gates</a>
+      <a href="services.html#turfing">Turfing</a>
+      <a href="services.html#artificial-grass">Artificial Grass</a>
+      <a href="services.html#brickworks">Brickworks</a>
+      <a href="services.html#groundworks">Groundworks</a>
+      <a href="services.html#maintenance">Garden Maintenance</a>
+      <a href="services.html#hedge-cutting">Hedge Cutting</a>
+      <a href="services.html#lawn-mowing">Lawn Mowing</a>
+      <a href="services.html#tree-surgeon">Tree Surgeon</a>
+      <a href="services.html#planting">Planting</a>
+    </div>
+    <a href="index.html#about"    class="mobile-menu__link">About</a>
+    <a href="index.html#coverage" class="mobile-menu__link">Coverage</a>
+    <a href="index.html#faq"      class="mobile-menu__link">FAQ</a>
+    <a href="contact.html"        class="mobile-menu__link">Contact</a>
+  </nav>
+  <div class="mobile-menu__footer">
+    <a href="tel:07471734798" class="mobile-menu__contact">📞 07471 734798</a>
+    <a href="mailto:contact@bestlandscape.co.uk" class="mobile-menu__contact" style="font-size:1rem;font-weight:400;color:rgba(255,255,255,0.65);">contact@bestlandscape.co.uk</a>
+    <a href="contact.html" class="btn btn--stone btn--lg" style="align-self:flex-start;">Get a Free Quote →</a>
   </div>
 </div>
 
-<!-- ============================================================
-     SERVICES — BENTO GRID
-============================================================ -->
-<section id="services">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2>Plumbing, drainage and emergency repairs — done with no fuss.</h2>
-      <p>Mainly a plumbing repair company, but we cover bathrooms, radiators, leaks and high-powered drain jetting too.</p>
+<!-- ═══ HERO ═════════════════════════════════════════════════ -->
+<section class="hero" id="home" aria-label="Hero — Surrey landscaping specialists">
+  <div class="hero__bg" aria-hidden="true">
+    <img
+      src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80&auto=format&fit=crop"
+      alt=""
+      loading="eager"
+      fetchpriority="high"
+    >
+    <div class="hero__overlay"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero__content">
+      <p class="hero__eyebrow">Surrey's Landscaping &amp; Gardening Specialists</p>
+
+      <h1 class="hero__headline">
+        Design. Build.<br><em>Maintain.</em>
+      </h1>
+
+      <p class="hero__sub">
+        We combine creativity, craftsmanship, and sustainability to transform
+        outdoor spaces across Surrey — from complete garden makeovers to routine
+        care that keeps everything looking its best.
+      </p>
+
+      <div class="hero__ctas">
+        <a href="contact.html" class="btn btn--stone btn--lg">
+          Get a Free Quote
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="services.html" class="btn btn--ghost btn--lg">
+          View All Services
+        </a>
+      </div>
+
+      <div class="hero__trust" aria-label="Trust badges">
+        <span class="badge"><span class="dot" aria-hidden="true"></span>10+ Years Experience</span>
+        <span class="badge"><span class="dot" aria-hidden="true"></span>Fully Insured</span>
+        <span class="badge"><span class="dot" aria-hidden="true"></span>Domestic &amp; Commercial</span>
+        <span class="badge"><span class="dot" aria-hidden="true"></span>5★ Yell &amp; Checkatrade</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <div class="hero__scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ═══ STATS BAR ════════════════════════════════════════════ -->
+<section class="stats" aria-label="Company at a glance">
+  <div class="container">
+    <div class="stats__grid stagger">
+
+      <div class="stats__item">
+        <div class="stats__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="stats__text">
+          <div class="stats__value"><span data-count="10" data-suffix="+">10+</span></div>
+          <div class="stats__label">Years of Experience</div>
+        </div>
+      </div>
+
+      <div class="stats__item">
+        <div class="stats__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="stats__text">
+          <div class="stats__value">Fully</div>
+          <div class="stats__label">Insured &amp; Guaranteed</div>
+        </div>
+      </div>
+
+      <div class="stats__item">
+        <div class="stats__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="stats__text">
+          <div class="stats__value"><span data-count="20" data-suffix="+">20+</span></div>
+          <div class="stats__label">Surrey Towns Covered</div>
+        </div>
+      </div>
+
+      <div class="stats__item">
+        <div class="stats__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="stats__text">
+          <div class="stats__value">5 ★</div>
+          <div class="stats__label">Yell &amp; Checkatrade Rated</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═════════════════════════════════════════════ -->
+<section class="services section--lg" id="services" aria-labelledby="services-heading">
+  <div class="container">
+
+    <div class="section-header reveal">
+      <p class="eyebrow">What We Do</p>
+      <h2 id="services-heading">Full-Service Outdoor Specialists</h2>
+      <p class="lead" style="max-width:580px;margin-top:1rem;">
+        From structural hard landscaping to seasonal gardening — one local team
+        handles everything, with durable materials and clean workmanship every time.
+      </p>
     </div>
 
-    <div class="bento reveal">
-      <div class="bento-cell bento-feature span-4">
-        <div class="num">01 — Plumbing</div>
-        <h3>General &amp; emergency plumbing</h3>
-        <p>Burst pipes, leaks, taps, toilet flushes, radiators, ball valves, tanks, inlet valves and radiator valves — fixed properly, with free estimates.</p>
-        <ul>
-          <li>Bathrooms &amp; radiator installs</li>
-          <li>Leak fixes &amp; general repairs</li>
-          <li>Electric, mixer &amp; power showers</li>
-          <li>Saniflo installations</li>
+    <!-- Tabs -->
+    <div class="services__tabs reveal" role="tablist" aria-label="Service categories">
+      <button class="services__tab active" data-panel="panel-landscaping" role="tab" aria-selected="true"  aria-controls="panel-landscaping">🏗 Landscaping</button>
+      <button class="services__tab"        data-panel="panel-gardening"   role="tab" aria-selected="false" aria-controls="panel-gardening">🌿 Gardening</button>
+    </div>
+
+    <!-- Landscaping Panel -->
+    <div class="services__panel active" id="panel-landscaping" role="tabpanel" aria-labelledby="">
+      <div class="services__grid stagger">
+
+        <article class="service-card">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1588421357574-87938a86fa28?w=800&q=75&auto=format&fit=crop" alt="Patio and driveway in Surrey" loading="lazy">
+            <span class="service-card__category">Surfaces</span>
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Driveways &amp; Patios</h3>
+            <p class="service-card__desc">Porcelain, sandstone or block — expertly laid on a properly compacted sub-base with correct drainage falls so surfaces stay level and long-lasting.</p>
+            <div class="service-card__tags">
+              <span class="service-card__tag">Porcelain</span>
+              <span class="service-card__tag">Sandstone</span>
+              <span class="service-card__tag">Block Paving</span>
+            </div>
+            <a href="services.html#patios" class="service-card__link">
+              Learn more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=75&auto=format&fit=crop" alt="Composite decking in Surrey garden" loading="lazy">
+            <span class="service-card__category">Outdoor Living</span>
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Decking</h3>
+            <p class="service-card__desc">Timber or composite decks with clean detailing, solid sub-structures and optional lighting — designed for sloping gardens, sun traps and family entertaining spaces.</p>
+            <div class="service-card__tags">
+              <span class="service-card__tag">Composite</span>
+              <span class="service-card__tag">Hardwood</span>
+              <span class="service-card__tag">Steps &amp; Rails</span>
+            </div>
+            <a href="services.html#decking" class="service-card__link">
+              Learn more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1565374395542-0ce18882c857?w=800&q=75&auto=format&fit=crop" alt="Timber fencing and gate in Surrey" loading="lazy">
+            <span class="service-card__category">Boundaries &amp; Privacy</span>
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Fencing &amp; Gates</h3>
+            <p class="service-card__desc">Closeboard, panel, decorative and custom gate solutions. Properly set posts and quality timber that hold up through years of British weather.</p>
+            <div class="service-card__tags">
+              <span class="service-card__tag">Closeboard</span>
+              <span class="service-card__tag">Panels</span>
+              <span class="service-card__tag">Custom Gates</span>
+            </div>
+            <a href="services.html#fencing" class="service-card__link">
+              Learn more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=75&auto=format&fit=crop" alt="Fresh turfing in a Surrey garden" loading="lazy">
+            <span class="service-card__category">Lawns</span>
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Turfing</h3>
+            <p class="service-card__desc">Premium turf on properly graded and compacted topsoil. Strip, level, prep and lay — with clean steel or block edges for a finish that roots quickly and stays lush.</p>
+            <div class="service-card__tags">
+              <span class="service-card__tag">Topsoil Prep</span>
+              <span class="service-card__tag">Laser Level</span>
+              <span class="service-card__tag">Clean Edges</span>
+            </div>
+            <a href="services.html#turfing" class="service-card__link">
+              Learn more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=800&q=75&auto=format&fit=crop" alt="Artificial grass installed in Surrey" loading="lazy">
+            <span class="service-card__category">Low Maintenance</span>
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Artificial Grass</h3>
+            <p class="service-card__desc">Perfect-look lawns year-round with minimal upkeep. Pet-friendly, child-safe and installed with proper drainage layers so water never pools.</p>
+            <div class="service-card__tags">
+              <span class="service-card__tag">Pet-Friendly</span>
+              <span class="service-card__tag">Drainage Base</span>
+              <span class="service-card__tag">Edge Trim</span>
+            </div>
+            <a href="services.html#artificial-grass" class="service-card__link">
+              Learn more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=75&auto=format&fit=crop" alt="Brickwork garden wall and steps" loading="lazy">
+            <span class="service-card__category">Structure</span>
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Brickworks</h3>
+            <p class="service-card__desc">Garden walls, raised planters, steps and detailed brickwork that ties the whole layout together — built on proper footings for lasting strength.</p>
+            <div class="service-card__tags">
+              <span class="service-card__tag">Retaining Walls</span>
+              <span class="service-card__tag">Planters</span>
+              <span class="service-card__tag">Steps</span>
+            </div>
+            <a href="services.html#brickworks" class="service-card__link">
+              Learn more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=75&auto=format&fit=crop" alt="Groundworks preparation in Surrey" loading="lazy">
+            <span class="service-card__category">Foundations</span>
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Groundworks</h3>
+            <p class="service-card__desc">Excavation, levelling, sub-bases and drainage to keep all surfaces stable long-term. Compact machines and laser levels for accurate, safe preparation.</p>
+            <div class="service-card__tags">
+              <span class="service-card__tag">Sub-base</span>
+              <span class="service-card__tag">Drainage</span>
+              <span class="service-card__tag">Excavation</span>
+            </div>
+            <a href="services.html#groundworks" class="service-card__link">
+              Learn more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div><!-- /services__grid -->
+    </div><!-- /panel-landscaping -->
+
+    <!-- Gardening Panel -->
+    <div class="services__panel" id="panel-gardening" role="tabpanel">
+      <div class="services__grid stagger">
+
+        <article class="service-card">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=75&auto=format&fit=crop" alt="Garden maintenance in Surrey" loading="lazy">
+            <span class="service-card__category">Ongoing Care</span>
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Garden Maintenance</h3>
+            <p class="service-card__desc">Mowing, pruning, weeding, seasonal tidy-ups and bed care — all the essentials on a schedule that suits you, with green waste removed each visit.</p>
+            <div class="service-card__tags">
+              <span class="service-card__tag">Weekly / Fortnightly</span>
+              <span class="service-card__tag">Seasonal</span>
+              <span class="service-card__tag">Waste Removed</span>
+            </div>
+            <a href="services.html#maintenance" class="service-card__link">
+              Learn more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&q=75&auto=format&fit=crop" alt="Hedge cutting in Surrey garden" loading="lazy">
+            <span class="service-card__category">Neat Lines</span>
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Hedge Cutting</h3>
+            <p class="service-card__desc">Shaping, height control and seasonal trimming for clean boundaries. All cuttings removed — leaving hedges healthy and your garden looking crisp.</p>
+            <div class="service-card__tags">
+              <span class="service-card__tag">Shaping</span>
+              <span class="service-card__tag">Height Control</span>
+              <span class="service-card__tag">Topiary</span>
+            </div>
+            <a href="services.html#hedge-cutting" class="service-card__link">
+              Learn more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1525498128493-380d1990a112?w=800&q=75&auto=format&fit=crop" alt="Lawn mowing with clean stripes in Surrey" loading="lazy">
+            <span class="service-card__category">Regular</span>
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Lawn Mowing</h3>
+            <p class="service-card__desc">Scheduled mowing plans — right height for the season, crisp edging, neat stripes. Regular visits keep grass tidy, healthy and a pleasure to use.</p>
+            <div class="service-card__tags">
+              <span class="service-card__tag">Weekly / Fortnightly</span>
+              <span class="service-card__tag">Edging</span>
+              <span class="service-card__tag">Stripes</span>
+            </div>
+            <a href="services.html#lawn-mowing" class="service-card__link">
+              Learn more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?w=800&q=75&auto=format&fit=crop" alt="Lawn care aeration and treatment" loading="lazy">
+            <span class="service-card__category">Health</span>
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Lawn Care</h3>
+            <p class="service-card__desc">Aeration, scarifying, moss control, overseeding and seasonal feed treatments to keep lawns thick, green and resilient through Surrey clay and heavy use.</p>
+            <div class="service-card__tags">
+              <span class="service-card__tag">Aeration</span>
+              <span class="service-card__tag">Scarifying</span>
+              <span class="service-card__tag">Seasonal Feed</span>
+            </div>
+            <a href="services.html#lawn-care" class="service-card__link">
+              Learn more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1576091358783-a212ec293e37?w=800&q=75&auto=format&fit=crop" alt="Tree surgeon working in Surrey garden" loading="lazy">
+            <span class="service-card__category">Trees</span>
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Tree Surgeon</h3>
+            <p class="service-card__desc">Crown care, deadwood removal, shaping and reduction to protect your home, improve light and keep trees healthy for years to come.</p>
+            <div class="service-card__tags">
+              <span class="service-card__tag">Crown Reduction</span>
+              <span class="service-card__tag">Deadwood</span>
+              <span class="service-card__tag">Shaping</span>
+            </div>
+            <a href="services.html#tree-surgeon" class="service-card__link">
+              Learn more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=800&q=75&auto=format&fit=crop" alt="Planting shrubs and borders in Surrey" loading="lazy">
+            <span class="service-card__category">Planting</span>
+          </div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Planting</h3>
+            <p class="service-card__desc">Design, planting and aftercare for borders, hedges, specimen trees and seasonal beds — planned for Surrey soils and how your family actually uses the space.</p>
+            <div class="service-card__tags">
+              <span class="service-card__tag">Borders</span>
+              <span class="service-card__tag">Privacy Hedging</span>
+              <span class="service-card__tag">Aftercare</span>
+            </div>
+            <a href="services.html#planting" class="service-card__link">
+              Learn more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div><!-- /services__grid -->
+    </div><!-- /panel-gardening -->
+
+  </div>
+</section>
+
+<!-- ═══ REVIEWS ══════════════════════════════════════════════ -->
+<section class="reviews section" aria-labelledby="reviews-heading">
+  <div class="container">
+    <div class="section-header--center reveal">
+      <p class="eyebrow">What Our Clients Say</p>
+      <h2 id="reviews-heading">Trusted Across Surrey</h2>
+    </div>
+    <div class="reviews__grid stagger">
+
+      <div class="review-card">
+        <div class="review-card__stars" aria-label="5 stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-card__text">Absolutely transformed our back garden. The team planned everything carefully — new patio, turfing and planting all completed in under a week. The attention to detail is outstanding and the communication throughout was excellent.</p>
+        <div>
+          <div class="review-card__author">Sarah M. — Woking</div>
+          <div class="review-card__source">Checkatrade · Verified Review</div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-card__stars" aria-label="5 stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-card__text">Cracking job done on my base for my summerhouse and paths around it. Turned up when they said they would, worked hard all day and left the site spotless. Genuinely could not be happier with the result. Would absolutely use again.</p>
+        <div>
+          <div class="review-card__author">James T. — Guildford</div>
+          <div class="review-card__source">Yell.com · 5 Stars</div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-card__stars" aria-label="5 stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-card__text">Good service and they respond quickly. We've had the team maintain our garden for two years now and the standard never drops. Reliable, tidy and always happy to answer questions. I highly recommend them to my friends and family.</p>
+        <div>
+          <div class="review-card__author">Priya K. — Cobham</div>
+          <div class="review-card__source">Checkatrade · Verified Review</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ══════════════════════════════════════════════════ -->
+<section class="about section--lg" id="about" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="about__inner">
+
+      <div class="about__img-wrap reveal--left">
+        <div class="about__img">
+          <img
+            src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=900&q=80&auto=format&fit=crop&crop=center"
+            alt="Best Landscape & Gardening team at work in a Surrey garden"
+            loading="lazy"
+          >
+        </div>
+        <div class="about__img-accent">
+          <strong>10+</strong>
+          <span>Years serving Surrey homeowners</span>
+        </div>
+      </div>
+
+      <div class="about__content reveal--right">
+        <p class="eyebrow">About Us</p>
+        <h2 id="about-heading">Surrey's Trusted Outdoor Specialists</h2>
+
+        <p class="lead">
+          We combine creativity, craftsmanship, and sustainability to design,
+          build, and maintain stunning outdoor spaces across Surrey.
+        </p>
+
+        <p>
+          Best Landscape &amp; Gardening has been transforming gardens across
+          Surrey for over a decade. From small residential tidy-ups to
+          full-scale commercial landscaping, our team brings the same care,
+          precision and attention to detail to every project.
+        </p>
+        <p>
+          We work closely with you to bring your ideas to life — using the
+          latest design methods, durable materials suited to Surrey's clay soils,
+          and sustainable techniques that keep your outdoor space beautiful
+          for years, not just months.
+        </p>
+
+        <ul class="about__checklist" aria-label="Our key commitments">
+          <li class="about__check">
+            <span class="about__check-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Free on-site consultations and detailed, fixed quotes
+          </li>
+          <li class="about__check">
+            <span class="about__check-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Full public liability insurance on every project
+          </li>
+          <li class="about__check">
+            <span class="about__check-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Workmanship guarantee on all structural work
+          </li>
+          <li class="about__check">
+            <span class="about__check-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Clear timelines, respectful site management, clean handovers
+          </li>
+          <li class="about__check">
+            <span class="about__check-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Domestic &amp; commercial, from Camberley to Cobham
+          </li>
         </ul>
-      </div>
-      <div class="bento-cell bento-emergency span-2">
-        <div class="num">02 — Emergency</div>
-        <h3>24 hour call-out</h3>
-        <p>Engineer arriving within 1 hour, day or night, 365 days a year.</p>
+
+        <a href="contact.html" class="btn btn--primary btn--lg">
+          Start Your Project
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
       </div>
 
-      <div class="bento-cell span-2">
-        <div class="num">03 — Drain Jetting</div>
-        <h3>4000 psi water jets</h3>
-        <p>High pressure drain jetting at 275 bar to blast blockages away.</p>
-      </div>
-      <div class="bento-cell span-4">
-        <div class="num">04 — Drainage</div>
-        <h3>Drain unblocking &amp; rodding</h3>
-        <p>Kitchen sink or bathroom blockages, drain rodding and clearances throughout all Leeds areas.</p>
-        <ul>
-          <li>Kitchen &amp; bathroom blockages</li>
-          <li>Drain rodding</li>
-          <li>Overflow &amp; tank clearance</li>
-          <li>Damaged fitting replacement</li>
-        </ul>
-      </div>
-
-      <div class="bento-cell span-3">
-        <div class="num">05 — Repairs</div>
-        <h3>Pumps &amp; valves</h3>
-        <p>Pumps, ball valves and inlet valve repairs and replacements.</p>
-      </div>
-      <div class="bento-cell span-3">
-        <div class="num">06 — Pricing</div>
-        <h3>O.A.P discount</h3>
-        <p>Free quotes for anyone, plus a discount for O.A.P customers.</p>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     EMERGENCY — what to do
-============================================================ -->
-<section id="emergency">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2>A burst pipe can't wait. Here's what to do while help is on the way.</h2>
-      <p>Experienced emergency plumbers serving Leeds &amp; the surrounding areas.</p>
+<!-- ═══ WHY CHOOSE US ════════════════════════════════════════ -->
+<section class="why-us section" aria-labelledby="why-heading">
+  <div class="container">
+    <div class="section-header--center reveal">
+      <p class="eyebrow">Why Best Landscape</p>
+      <h2 id="why-heading">Built on Reliability</h2>
+      <p class="lead">Every project is backed by experience, honesty and a commitment to results that hold up long after we've left the site.</p>
     </div>
-    <div class="steps reveal">
-      <div class="step">
-        <div class="num">01</div>
-        <h4>Shut off the water</h4>
-        <p>Whenever a pipe bursts, leaks, or triggers flooding due to drain problems, always shut off the water supply first.</p>
-      </div>
-      <div class="step">
-        <div class="num">02</div>
-        <h4>Find the stop tap</h4>
-        <p>Commonly beneath the kitchen sink, though sometimes where water enters the property. Some homes have two — know where both are.</p>
-      </div>
-      <div class="step">
-        <div class="num">03</div>
-        <h4>Call us — we're already on it</h4>
-        <p>Our team resolves overflow problems, clears blockages and replaces damaged fittings, fast, before they cause further damage.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="why-us__grid stagger">
 
-<!-- ============================================================
-     ABOUT
-============================================================ -->
-<section id="about">
-  <div class="wrap about">
-    <div class="about-figure reveal">
-      <span class="badge">No Call-Out Charge</span>
-    </div>
-    <div class="about-copy reveal">
-      <p class="eyebrow">About the company</p>
-      <h2>A Leeds plumbing company with no fuss, and reasonable prices.</h2>
-      <p>Hello and welcome to LeedsPlumber.uk. We are a Leeds based plumbing company that strives to get your plumbing needs done with a friendly plumber at very competitive prices. We only charge from arrival, and there is no call-out charge.</p>
-      <p>We operate 24 hours a day, 365 days a year, with plumbers covering all Leeds areas. We offer an O.A.P discount and free quotes to anyone about any work — and all our engineers are fully insured.</p>
-      <div class="press">
-        <b>"Always arrive on time."</b>
-        <span>Courteous, polite &amp; professional, every visit</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     TRUST STRIP
-============================================================ -->
-<section id="pricing-strip">
-  <div class="wrap">
-    <div class="pricing reveal">
-      <div>
-        <p class="eyebrow">Honest pricing</p>
-        <h2>No call-out charge. Ever.</h2>
-        <p style="color:rgba(255,255,255,0.65); font-size:14px;">We only charge from the moment we arrive. Free quotes are available to anyone about any work, with a discount offered to O.A.P customers.</p>
-      </div>
-      <div class="price-card">
-        <b>£0</b>
-        <span>Call-out charge, always free to ask</span>
-      </div>
-      <div class="price-card">
-        <b>1 hr</b>
-        <span>Typical emergency arrival window</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     CTA
-============================================================ -->
-<section>
-  <div class="wrap">
-    <div class="cta-band reveal">
-      <p class="eyebrow" style="justify-content:center;">Fully insured · Operating 24/7/365</p>
-      <h2>Wherever you are in Leeds, just call.</h2>
-      <p>Any time of night or day — we aim to arrive within 1 hour, or at a more convenient time.</p>
-      <a href="tel:01134182075" class="btn-primary magnetic">
-        Call 0113 418 2075
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     CONTACT
-============================================================ -->
-<section id="contact">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2>Get in touch.</h2>
-      <p>Send your details and we'll get back to you, or call us directly.</p>
-    </div>
-    <div class="contact-grid reveal">
-      <div>
-        <div class="info-row">
-          <div class="ico">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div><h4>Address</h4><p>51 Whinmoor Crescent, Leeds, LS14 1NJ</p></div>
+      <div class="why-card">
+        <div class="why-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
         </div>
-        <div class="info-row">
-          <div class="ico">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg>
-          </div>
-          <div><h4>Phone</h4><p>0113 418 2075</p></div>
-        </div>
-        <div class="info-row">
-          <div class="ico">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <div><h4>Hours</h4><p>24 hours a day, 365 days a year</p></div>
-        </div>
+        <h3 class="why-card__title">Quick Response</h3>
+        <p class="why-card__desc">We aim to visit within one working day and send written quotes within 24 hours — so you can plan with confidence and no long waits.</p>
       </div>
-      <form class="contact-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Sent — thank you!';">
-        <input type="text" placeholder="Full name" required />
-        <input type="tel" placeholder="Phone number" required />
-        <input type="email" placeholder="Email address" required />
-        <textarea placeholder="Tell us about the job"></textarea>
-        <button type="submit">Send</button>
+
+      <div class="why-card">
+        <div class="why-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="why-card__title">Fully Insured</h3>
+        <p class="why-card__desc">We carry full public liability cover and offer a clear workmanship guarantee on structural work, so you're protected from day one.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3 class="why-card__title">Truly Local</h3>
+        <p class="why-card__desc">We know Surrey clay, Surrey slopes and Surrey neighbours. Our local knowledge means better planning and fewer surprises on your project.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <h3 class="why-card__title">Transparent Pricing</h3>
+        <p class="why-card__desc">Fixed quotes with no hidden extras. We explain what's included before we start and stick to the agreed price — unless scope changes at your request.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3 class="why-card__title">Quality Materials</h3>
+        <p class="why-card__desc">We specify materials suited to Surrey's heavy clay and wet winters — not the cheapest options, but the ones that perform and look great for years.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3 class="why-card__title">Clean Team</h3>
+        <p class="why-card__desc">Respectful of your home, your neighbours and your time. We protect surrounding areas, keep the site tidy and leave with a thorough clean-up every day.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COVERAGE ════════════════════════════════════════════ -->
+<section class="coverage section--lg" id="coverage" aria-labelledby="coverage-heading">
+  <div class="container">
+    <div class="section-header--center reveal">
+      <p class="eyebrow">Where We Work</p>
+      <h2 id="coverage-heading">Surrey-Wide Coverage</h2>
+      <p class="lead">
+        We serve the full length and breadth of Surrey — from Camberley and
+        Guildford to Cobham, Esher and beyond. Not sure if we cover your
+        address? Use the postcode checker below.
+      </p>
+    </div>
+
+    <div class="coverage__grid stagger" aria-label="Surrey towns we serve">
+      <span class="coverage__town">Woking</span>
+      <span class="coverage__town">Guildford</span>
+      <span class="coverage__town">Camberley</span>
+      <span class="coverage__town">Weybridge</span>
+      <span class="coverage__town">Esher</span>
+      <span class="coverage__town">Cobham</span>
+      <span class="coverage__town">Oxshott</span>
+      <span class="coverage__town">Leatherhead</span>
+      <span class="coverage__town">West Byfleet</span>
+      <span class="coverage__town">Fetcham</span>
+      <span class="coverage__town">Chobham</span>
+      <span class="coverage__town">Virginia Water</span>
+      <span class="coverage__town">Egham</span>
+      <span class="coverage__town">Ascot</span>
+      <span class="coverage__town">Walton-on-Thames</span>
+      <span class="coverage__town">Epsom</span>
+      <span class="coverage__town">Reigate</span>
+      <span class="coverage__town">Frimley</span>
+      <span class="coverage__town">Bagshot</span>
+      <span class="coverage__town">Lightwater</span>
+    </div>
+
+    <div class="coverage__cta reveal" style="margin-top:3rem;">
+      <p style="color:rgba(255,255,255,0.6);font-size:0.875rem;margin-bottom:1rem;">Enter your postcode to confirm we cover your address</p>
+      <form class="postcode-form" id="postcode-form" role="search" aria-label="Postcode coverage checker" style="margin:0 auto;">
+        <input
+          type="text"
+          id="postcode-input"
+          placeholder="e.g. GU21 3AB"
+          maxlength="8"
+          autocomplete="postal-code"
+          aria-label="Enter your postcode"
+        >
+        <button type="submit" aria-label="Check postcode coverage">Check Coverage</button>
       </form>
+      <p id="postcode-result" role="status" aria-live="polite"></p>
+      <div style="margin-top:2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="tel:07471734798"                  class="btn btn--ghost">📞 07471 734798</a>
+        <a href="mailto:contact@bestlandscape.co.uk" class="btn btn--ghost">✉ Email Us</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     FOOTER
-============================================================ -->
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <div class="logo" style="margin-bottom:14px;">Leeds <span>Plumber.uk — 24hr Plumbing &amp; Drainage</span></div>
-        <p style="max-width:320px; font-size:13.5px;">No fuss, and reasonable prices. No call-out charge — 24 hour emergency plumbing across all Leeds areas.</p>
+<!-- ═══ FAQ ══════════════════════════════════════════════════ -->
+<section class="faq section" id="faq" aria-labelledby="faq-heading">
+  <div class="container">
+    <div class="section-header--center reveal">
+      <p class="eyebrow">Common Questions</p>
+      <h2 id="faq-heading">Help &amp; Guidance</h2>
+      <p class="lead">Clear answers to help you plan confidently — before you pick up the phone.</p>
+    </div>
+
+    <div class="faq__list" role="list">
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-item__trigger" aria-expanded="false">
+          <span class="faq-item__q">Do you cover all of Surrey for landscaping and gardening?</span>
+          <span class="faq-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-item__body">
+          <p class="faq-item__a">Yes. We serve Woking, Guildford, Epsom, Reigate, Weybridge and all surrounding areas. Most projects start with a short call followed by a free on-site visit — this helps us confirm measurements, drainage considerations and access so your quote is accurate and the build runs smoothly. If you're just outside our core area, send your postcode and a photo and we'll tell you quickly if we can help.</p>
+        </div>
       </div>
-      <div>
-        <h4>Useful Links</h4>
-        <ul>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#emergency">Emergency</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-        </ul>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-item__trigger" aria-expanded="false">
+          <span class="faq-item__q">How quickly can you visit and provide a quote?</span>
+          <span class="faq-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-item__body">
+          <p class="faq-item__a">We aim to visit within one working day. Quotes follow within 24 hours for straightforward work. Larger builds that need drawings or supplier confirmations may take a little longer, but we always keep you updated. If timing is urgent we can often phase the project so you still get results quickly.</p>
+        </div>
       </div>
-      <div>
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="tel:01134182075">0113 418 2075</a></li>
-          <li><a href="#">51 Whinmoor Crescent, Leeds</a></li>
-          <li><a href="#">Open 24/7, 365 days</a></li>
-        </ul>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-item__trigger" aria-expanded="false">
+          <span class="faq-item__q">What materials work best for patios and driveways in Surrey clay soil?</span>
+          <span class="faq-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-item__body">
+          <p class="faq-item__a">Clay soil moves with moisture, so the base is critical. We excavate to the correct depth, install a compacted sub-base and set accurate falls for drainage. Porcelain slabs are popular for a clean, low-maintenance finish. Sandstone and block paving also perform well when the bed is prepared correctly and edges are properly secured. We'll always advise on the best option for your specific site.</p>
+        </div>
       </div>
-      <div>
-        <h4>Covering</h4>
-        <ul>
-          <li><a href="#">Headingley &amp; Horsforth</a></li>
-          <li><a href="#">Armley &amp; Hyde Park</a></li>
-          <li><a href="#">Pudsey &amp; Morley</a></li>
-        </ul>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-item__trigger" aria-expanded="false">
+          <span class="faq-item__q">How long does a full garden project take?</span>
+          <span class="faq-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-item__body">
+          <p class="faq-item__a">Small tasks like a compact patio or short run of fencing typically complete in 2–4 days. Full garden renewals with multiple elements usually run 1–3 weeks depending on access, weather and material lead times. We share a clear schedule before starting and keep you updated throughout so there are no surprises.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-item__trigger" aria-expanded="false">
+          <span class="faq-item__q">Are you insured and do you guarantee the work?</span>
+          <span class="faq-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-item__body">
+          <p class="faq-item__a">Yes. We hold full public liability insurance on every project. Structural work carries a clear workmanship guarantee, and manufacturer warranties apply to products such as composite decking and artificial grass. Your quote includes the specific terms for your project so you always know exactly where you stand.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-item__trigger" aria-expanded="false">
+          <span class="faq-item__q">Do you handle drainage and permission checks?</span>
+          <span class="faq-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-item__body">
+          <p class="faq-item__a">Yes. We assess existing levels and water flow so all surfaces drain correctly. Where needed we install channels, gullies and soakaways. If planning permission or utilities checks are required we let you know early and guide the process — so you stay compliant and the project stays on track.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-item__trigger" aria-expanded="false">
+          <span class="faq-item__q">How do I get started and what happens next?</span>
+          <span class="faq-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-item__body">
+          <p class="faq-item__a">Send your postcode, a short description and a few photos via the contact form or WhatsApp. We confirm a visit, discuss options and materials on site, then send a detailed quote. Once you approve we lock in dates, order materials and share a simple schedule. On completion we walk through the work with you and provide aftercare guidance for lawns, planting and surfaces.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA BANNER ══════════════════════════════════════════ -->
+<section class="cta-banner" aria-labelledby="cta-heading">
+  <div class="container">
+    <div class="cta-banner__inner">
+      <div class="reveal--left">
+        <p class="eyebrow" style="color:var(--stone);">Ready to Start?</p>
+        <h2 class="cta-banner__title" id="cta-heading">Transform Your<br>Surrey Garden Today</h2>
+        <p class="cta-banner__sub">Free on-site visit · Fixed quote · No obligation · Fast response</p>
+      </div>
+      <div class="cta-banner__actions reveal--right">
+        <a href="tel:07471734798" class="cta-banner__phone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.0 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          07471 734798
+        </a>
+        <a href="contact.html" class="btn btn--stone btn--lg">
+          Get a Free Quote
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="mailto:contact@bestlandscape.co.uk" style="font-size:0.8rem;color:rgba(255,255,255,0.5);letter-spacing:0.02em;">contact@bestlandscape.co.uk</a>
       </div>
     </div>
-    <p class="areas-text">We cover Whinmoor, Headingley, Horsforth, Garforth, Armley, Hyde Park, Adel, Weetwood, Meanwood, Cookridge, Bramley, Bramhope, West Park, Rodley, Stanningley, Pudsey, Morley, Farnley, Farsley, Crossgates, Seacroft, Hunslet, Rothwell, Chapel Allerton, Moortown, Tinshill, Churwell, Beeston, Kirkstall — in fact, all Leeds areas are covered.</p>
-    <div class="foot-bottom">
-      <span>This is a private, unauthorized design concept created for demonstration purposes only. It is not affiliated with any active business.</span>
-      <span>Fully Insured · No Call-Out Charge</span>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+
+      <!-- Brand -->
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo">
+          <div class="nav__logo-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" color="#C4A882">
+              <path d="M12 2a10 10 0 0 1 10 10c0 4-2 7-5 9"/>
+              <path d="M12 2C8 6 6 10 7 14c1 3 3 5 5 8"/>
+              <path d="M12 2c4 4 6 8 5 12-1 3-3 5-5 8"/>
+            </svg>
+          </div>
+          <span>Best Landscape<br><span style="color:var(--stone);">&amp; Gardening</span></span>
+        </a>
+        <p class="footer__tagline">
+          Design · Build · Maintain. Transforming outdoor spaces across Surrey
+          with craftsmanship, sustainability and a personal touch — since 2014.
+        </p>
+        <div class="footer__social" aria-label="Social media links">
+          <a href="https://facebook.com/bestlandscapesurrey" target="_blank" rel="noopener noreferrer" aria-label="Best Landscape on Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://wa.me/447471734798" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Landscaping -->
+      <div class="footer__col">
+        <h5>Landscaping</h5>
+        <a href="services.html#patios"           class="footer__link">Driveways &amp; Patios</a>
+        <a href="services.html#decking"          class="footer__link">Decking</a>
+        <a href="services.html#fencing"          class="footer__link">Fencing &amp; Gates</a>
+        <a href="services.html#turfing"          class="footer__link">Turfing</a>
+        <a href="services.html#artificial-grass" class="footer__link">Artificial Grass</a>
+        <a href="services.html#brickworks"       class="footer__link">Brickworks</a>
+        <a href="services.html#groundworks"      class="footer__link">Groundworks</a>
+      </div>
+
+      <!-- Gardening -->
+      <div class="footer__col">
+        <h5>Gardening</h5>
+        <a href="services.html#maintenance"    class="footer__link">Garden Maintenance</a>
+        <a href="services.html#hedge-cutting"  class="footer__link">Hedge Cutting</a>
+        <a href="services.html#lawn-mowing"    class="footer__link">Lawn Mowing</a>
+        <a href="services.html#lawn-care"      class="footer__link">Lawn Care</a>
+        <a href="services.html#tree-surgeon"   class="footer__link">Tree Surgeon</a>
+        <a href="services.html#planting"       class="footer__link">Planting</a>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer__col">
+        <h5>Contact</h5>
+        <div class="footer__contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.0 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <span><a href="tel:07471734798">07471 734798</a></span>
+        </div>
+        <div class="footer__contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span><a href="mailto:contact@bestlandscape.co.uk">contact@bestlandscape.co.uk</a></span>
+        </div>
+        <div class="footer__contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Serving all of Surrey &amp; surrounding areas</span>
+        </div>
+        <div style="margin-top:1.25rem;">
+          <a href="contact.html" class="btn btn--stone btn--sm">Free Quote →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2024 Best Landscape &amp; Gardening Surrey. All rights reserved.</p>
+      <div class="footer__trust">
+        <span>⭐ Yell.com 5-Star Rated</span>
+        <span>✓ Checkatrade Member</span>
+        <span>🔒 Fully Insured</span>
+      </div>
     </div>
   </div>
 </footer>
 
-<script>
-/* ================================================================
-   AMBIENT CURSOR LENS
-   - Position: dampened follow via GSAP quickTo (transform-only)
-   - Zoom: cursor speed maps to lens + ring scale (magnetic lens zoom)
-   - Blur: speed also maps to backdrop blur radius for a "rack focus"
-     feel — fast moves blur out, slow/idle settles into a sharp,
-     magnified lens. Ring counter-rotates slightly for polish.
-   - Fades out and halts on pointerleave / tab blur to stay 60fps.
-   ================================================================ */
-(function ambientLens(){
-  const lens = document.getElementById('lens');
-  const ring = document.getElementById('lens-ring');
-  let active = false;
-  let lastX = null, lastY = null, lastT = null;
-  let rafId = null;
-  let targetBlur = 7, currentBlur = 7;
-
-  const xTo   = gsap.quickTo(lens, "x", { duration: 0.55, ease: "power3.out" });
-  const yTo   = gsap.quickTo(lens, "y", { duration: 0.55, ease: "power3.out" });
-  const rxTo  = gsap.quickTo(ring, "x", { duration: 0.85, ease: "power3.out" });
-  const ryTo  = gsap.quickTo(ring, "y", { duration: 0.85, ease: "power3.out" });
-  const scaleTo     = gsap.quickTo(lens, "scale", { duration: 0.45, ease: "power3.out" });
-  const ringScaleTo = gsap.quickTo(ring, "scale", { duration: 0.6,  ease: "power3.out" });
-  const ringRotTo   = gsap.quickTo(ring, "rotation", { duration: 1.2, ease: "power2.out" });
-
-  function onMove(e){
-    if (!active){
-      active = true;
-      lens.classList.add('is-active');
-      ring.classList.add('is-active');
-    }
-    const now = performance.now();
-    xTo(e.clientX); yTo(e.clientY);
-    rxTo(e.clientX); ryTo(e.clientY);
-
-    if (lastX !== null){
-      const dt = Math.max(now - lastT, 1);
-      const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
-      const speed = dist / dt; // px per ms
-
-      // velocity -> zoom: quick flicks magnify the lens (1 -> 1.35)
-      const zoom = gsap.utils.clamp(1, 1.35, 1 + speed * 0.6);
-      scaleTo(zoom);
-      ringScaleTo(gsap.utils.clamp(1, 1.18, 1 + speed * 0.3));
-
-      // velocity -> blur: fast moves rack out of focus, settles sharp
-      targetBlur = gsap.utils.clamp(7, 22, 7 + speed * 18);
-
-      // velocity -> subtle ring rotation for directional flair
-      ringRotTo((e.clientX - lastX) * 0.6);
-    }
-    lastX = e.clientX; lastY = e.clientY; lastT = now;
-  }
-
-  function tick(){
-    // ease the blur amount toward target and toward resting state when idle
-    currentBlur += (targetBlur - currentBlur) * 0.12;
-    targetBlur += (7 - targetBlur) * 0.04; // relax back to resting focus
-    lens.style.backdropFilter = `blur(${currentBlur.toFixed(1)}px) saturate(1.7) contrast(1.1)`;
-    lens.style.webkitBackdropFilter = lens.style.backdropFilter;
-    rafId = requestAnimationFrame(tick);
-  }
-  rafId = requestAnimationFrame(tick);
-
-  // Firefox / no-GPU fallback: if backdrop-filter is unsupported,
-  // swap to a tinted radial gradient so the lens still shows something
-  if (!CSS.supports('backdrop-filter', 'blur(1px)') &&
-      !CSS.supports('-webkit-backdrop-filter', 'blur(1px)')) {
-    lens.style.backdropFilter = 'none';
-    lens.style.background = 'radial-gradient(circle, rgba(13,70,161,0.28) 0%, rgba(66,165,245,0.10) 60%, transparent 82%)';
-    lens.style.boxShadow = '0 0 0 1.5px rgba(13,70,161,0.22), 0 24px 60px rgba(10,26,43,0.18)';
-  }
-
-  window.addEventListener('pointermove', onMove, { passive: true });
-  window.addEventListener('mousemove', onMove, { passive: true });
-  window.addEventListener('pointerleave', () => {
-    active = false;
-    lens.classList.remove('is-active');
-    ring.classList.remove('is-active');
-  });
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden){
-      active = false;
-      lens.classList.remove('is-active');
-      ring.classList.remove('is-active');
-    }
-  });
-})();
-
-/* ================================================================
-   MAGNETIC BUTTONS
-   ================================================================ */
-document.querySelectorAll('.magnetic').forEach(el => {
-  const strength = 0.35;
-  const xTo = gsap.quickTo(el, "x", { duration: 0.5, ease: "power3.out" });
-  const yTo = gsap.quickTo(el, "y", { duration: 0.5, ease: "power3.out" });
-
-  el.addEventListener('pointermove', (e) => {
-    const r = el.getBoundingClientRect();
-    const relX = e.clientX - (r.left + r.width / 2);
-    const relY = e.clientY - (r.top + r.height / 2);
-    xTo(relX * strength);
-    yTo(relY * strength);
-  });
-  el.addEventListener('pointerleave', () => { xTo(0); yTo(0); });
-});
-
-/* ================================================================
-   HERO TEXT REVEAL
-   ================================================================ */
-window.addEventListener('DOMContentLoaded', () => {
-  gsap.set('.hero-line span', { yPercent: 110 });
-  gsap.timeline({ delay: 0.2 })
-    .to('.hero-line span', { yPercent: 0, duration: 1.1, ease: "power4.out", stagger: 0.12 })
-    .from('.hero-sub', { opacity: 0, y: 16, duration: 0.8, ease: "power2.out" }, "-=0.6")
-    .from('.hero-stats .stat', { opacity: 0, y: 16, duration: 0.6, stagger: 0.08, ease: "power2.out" }, "-=0.5");
-});
-
-/* ================================================================
-   SCROLL REVEALS + MARQUEE + PARALLAX
-   ================================================================ */
-gsap.registerPlugin(ScrollTrigger);
-
-document.querySelectorAll('.reveal').forEach(el => {
-  gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 85%" } });
-});
-
-gsap.to('#marquee', { xPercent: -50, duration: 26, ease: "none", repeat: -1 });
-
-gsap.utils.toArray('.about-figure').forEach(fig => {
-  gsap.to(fig, { yPercent: -8, ease: "none", scrollTrigger: { trigger: fig, start: "top bottom", end: "bottom top", scrub: true } });
-});
-</script>
+<script src="js/main.js"></script>
 </body>
 </html>
