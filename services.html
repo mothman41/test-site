@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Services | Best Landscape &amp; Gardening Surrey</title>
+  <meta name="description" content="Full list of landscaping and gardening services from Best Landscape & Gardening Surrey. Patios, decking, fencing, turfing, garden maintenance, hedge cutting and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%231B3B2A'/><text y='.9em' font-size='70' x='12'>🌿</text></svg>">
+  <style>
+    .services-hero {
+      background: var(--forest);
+      padding: calc(var(--nav-h) + var(--sp-16)) 0 var(--sp-16);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .services-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .services-hero__inner {
+      position: relative;
+      z-index: 1;
+    }
+    .services-hero h1 { color: var(--white); margin-bottom: var(--sp-4); }
+    .services-hero p  { color: rgba(255,255,255,0.65); font-size: var(--sz-lg); max-width:580px;margin:0 auto; }
+
+    /* Sticky side nav */
+    .services-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: var(--sp-12);
+      align-items: start;
+      padding: var(--sp-16) 0;
+    }
+    @media (max-width: 900px) {
+      .services-layout { grid-template-columns: 1fr; }
+      .services-sidenav { display: none; }
+    }
+    .services-sidenav {
+      position: sticky;
+      top: calc(var(--nav-h) + var(--sp-6));
+      background: var(--white);
+      border-radius: var(--r-xl);
+      padding: var(--sp-5);
+      box-shadow: var(--sh-card);
+      border: 1px solid var(--border);
+    }
+    .services-sidenav h4 {
+      font-size: var(--sz-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--moss);
+      padding: var(--sp-3) var(--sp-3);
+      margin-top: var(--sp-3);
+    }
+    .services-sidenav h4:first-child { margin-top: 0; }
+    .services-sidenav a {
+      display: block;
+      padding: var(--sp-2) var(--sp-3);
+      font-size: var(--sz-sm);
+      color: var(--grey);
+      border-radius: var(--r-md);
+      transition: background var(--dur-fast), color var(--dur-fast);
+    }
+    .services-sidenav a:hover {
+      background: var(--sage);
+      color: var(--forest);
+    }
+    .services-sidenav a.active {
+      background: var(--sage);
+      color: var(--forest);
+      font-weight: 600;
+    }
+
+    /* Service detail section */
+    .service-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-10);
+      align-items: center;
+      padding: var(--sp-12) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .service-detail:last-child { border-bottom: none; }
+    .service-detail:nth-child(even) .service-detail__img { order: 2; }
+    .service-detail:nth-child(even) .service-detail__content { order: 1; }
+
+    @media (max-width: 700px) {
+      .service-detail { grid-template-columns: 1fr; }
+      .service-detail:nth-child(even) .service-detail__img,
+      .service-detail:nth-child(even) .service-detail__content { order: unset; }
+    }
+
+    .service-detail__img {
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .service-detail__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--dur-slow) var(--ease);
+    }
+    .service-detail:hover .service-detail__img img { transform: scale(1.04); }
+
+    .service-detail__content {}
+    .service-detail__content h2 {
+      font-size: var(--sz-3xl);
+      margin-bottom: var(--sp-4);
+    }
+    .service-detail__content p {
+      font-size: var(--sz-sm);
+      color: var(--char-mid);
+      line-height: 1.8;
+      margin-bottom: var(--sp-4);
+    }
+    .service-includes {
+      list-style: none;
+      margin: var(--sp-5) 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+    }
+    .service-includes li {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      font-size: var(--sz-sm);
+      color: var(--char-mid);
+    }
+    .service-includes li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--moss);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<nav class="nav scrolled" id="main-nav" role="navigation">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <div class="nav__logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" color="#C4A882">
+            <path d="M12 2a10 10 0 0 1 10 10c0 4-2 7-5 9"/>
+            <path d="M12 2C8 6 6 10 7 14c1 3 3 5 5 8"/>
+            <path d="M12 2c4 4 6 8 5 12-1 3-3 5-5 8"/>
+          </svg>
+        </div>
+        <span>Best Landscape<br><span>&amp; Gardening</span></span>
+      </a>
+      <div class="nav__links">
+        <a href="index.html"          class="nav__link">Home</a>
+        <a href="services.html"       class="nav__link" aria-current="page">Services</a>
+        <a href="index.html#about"    class="nav__link">About</a>
+        <a href="index.html#coverage" class="nav__link">Coverage</a>
+        <a href="index.html#faq"      class="nav__link">FAQ</a>
+      </div>
+      <div class="nav__actions">
+        <a href="tel:07471734798" class="nav__phone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.0 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          07471 734798
+        </a>
+        <a href="contact.html" class="btn btn--stone btn--sm">Free Quote</a>
+      </div>
+      <button class="nav__hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <nav class="mobile-menu__links">
+    <a href="index.html"    class="mobile-menu__link">Home</a>
+    <a href="services.html" class="mobile-menu__link">Services</a>
+    <a href="index.html#about" class="mobile-menu__link">About</a>
+    <a href="index.html#faq"   class="mobile-menu__link">FAQ</a>
+    <a href="contact.html"     class="mobile-menu__link">Contact</a>
+  </nav>
+  <div class="mobile-menu__footer">
+    <a href="tel:07471734798" class="mobile-menu__contact">📞 07471 734798</a>
+    <a href="contact.html" class="btn btn--stone btn--lg" style="align-self:flex-start;">Get a Free Quote →</a>
+  </div>
+</div>
+
+<!-- Hero -->
+<section class="services-hero">
+  <div class="container">
+    <div class="services-hero__inner">
+      <p class="eyebrow" style="color:var(--stone);">What We Offer</p>
+      <h1>All Services</h1>
+      <p>Complete landscaping and gardening across Surrey — hard and soft, structural and seasonal, one trusted team.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Main Layout -->
+<div class="container">
+  <div class="services-layout">
+
+    <!-- Sticky side nav -->
+    <aside class="services-sidenav" aria-label="Jump to service">
+      <h4>Landscaping</h4>
+      <a href="#patios">Driveways &amp; Patios</a>
+      <a href="#decking">Decking</a>
+      <a href="#fencing">Fencing &amp; Gates</a>
+      <a href="#artificial-grass">Artificial Grass</a>
+      <a href="#turfing">Turfing</a>
+      <a href="#brickworks">Brickworks</a>
+      <a href="#groundworks">Groundworks</a>
+      <h4>Gardening</h4>
+      <a href="#maintenance">Garden Maintenance</a>
+      <a href="#hedge-cutting">Hedge Cutting</a>
+      <a href="#lawn-mowing">Lawn Mowing</a>
+      <a href="#lawn-care">Lawn Care</a>
+      <a href="#tree-surgeon">Tree Surgeon</a>
+      <a href="#planting">Planting</a>
+    </aside>
+
+    <!-- Service details -->
+    <main>
+
+      <!-- LANDSCAPING -->
+      <div style="padding-top:var(--sp-4);">
+        <p class="eyebrow">Hard Landscaping</p>
+        <h2 style="font-size:var(--sz-3xl);margin-bottom:0;">Structural Outdoor Work</h2>
+      </div>
+
+      <article class="service-detail reveal" id="patios">
+        <div class="service-detail__img">
+          <img src="https://images.unsplash.com/photo-1588421357574-87938a86fa28?w=900&q=80&auto=format&fit=crop" alt="Porcelain patio and driveway in Surrey" loading="lazy">
+        </div>
+        <div class="service-detail__content">
+          <p class="eyebrow">Surfaces</p>
+          <h2>Driveways &amp; Patios</h2>
+          <p>Porcelain, sandstone or block paving — expertly laid on a properly compacted sub-base with correct drainage falls so your surface stays level, safe and attractive for years.</p>
+          <p>We handle full groundworks: excavation, sub-base installation, edging, bedding and pointing. Clay soil is properly managed so surfaces don't shift or subside after the first winter.</p>
+          <ul class="service-includes">
+            <li>Porcelain, sandstone, natural stone and block paving</li>
+            <li>Correct sub-base depth and compaction</li>
+            <li>Drainage falls and channel installation</li>
+            <li>Edging, pointing and clean finish</li>
+            <li>Driveways, patios, paths and terraces</li>
+          </ul>
+          <a href="contact.html" class="btn btn--primary">Get a Quote <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="service-detail reveal" id="decking">
+        <div class="service-detail__img">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80&auto=format&fit=crop" alt="Composite decking with steps in Surrey" loading="lazy">
+        </div>
+        <div class="service-detail__content">
+          <p class="eyebrow">Outdoor Living</p>
+          <h2>Decking</h2>
+          <p>Timber or composite decks designed for sloping Surrey gardens — solid sub-structures with correct joist spacing, weather-proof fixings and a finish that stays flat, safe and good-looking.</p>
+          <p>We handle every stage: groundworks, post setting, frame building, boarding, steps, balustrades and optional lighting — so you get a usable outdoor space, not just a platform.</p>
+          <ul class="service-includes">
+            <li>Composite (low maintenance) and pressure-treated hardwood</li>
+            <li>Concrete pads, posts and correctly sized joists</li>
+            <li>Steps, balustrades and child-safe gates</li>
+            <li>Step lighting and edge details</li>
+            <li>Levels set relative to door thresholds</li>
+          </ul>
+          <a href="contact.html" class="btn btn--primary">Get a Quote <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="service-detail reveal" id="fencing">
+        <div class="service-detail__img">
+          <img src="https://images.unsplash.com/photo-1565374395542-0ce18882c857?w=900&q=80&auto=format&fit=crop" alt="Closeboard fencing and gate in Surrey garden" loading="lazy">
+        </div>
+        <div class="service-detail__content">
+          <p class="eyebrow">Boundaries &amp; Privacy</p>
+          <h2>Fencing &amp; Gates</h2>
+          <p>Closeboard, panel, decorative and custom gate solutions. We set posts in concrete to the correct depth, use quality treated timber and finish with the hardware that suits your style and budget.</p>
+          <ul class="service-includes">
+            <li>Closeboard, featherboard and panel fencing</li>
+            <li>Decorative, contemporary and hit-and-miss styles</li>
+            <li>Wooden and metal gate supply and fitting</li>
+            <li>Post removal, concrete footing and setting</li>
+            <li>Gravel boards, capping rails and trellis</li>
+          </ul>
+          <a href="contact.html" class="btn btn--primary">Get a Quote <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="service-detail reveal" id="artificial-grass">
+        <div class="service-detail__img">
+          <img src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=900&q=80&auto=format&fit=crop" alt="Artificial grass installed with clean edges in Surrey" loading="lazy">
+        </div>
+        <div class="service-detail__content">
+          <p class="eyebrow">Low Maintenance</p>
+          <h2>Artificial Grass</h2>
+          <p>A perfect-looking lawn year-round without watering, mowing or muddy patches. We install on a proper sub-base with drainage layer and secure edging so it looks natural and lasts for years.</p>
+          <ul class="service-includes">
+            <li>Pet-friendly and child-safe pile options</li>
+            <li>Weed-suppressant membrane and drainage aggregate</li>
+            <li>Steel or timber edging for clean borders</li>
+            <li>Joins hidden and blended to match natural look</li>
+            <li>Suitable for slopes, shaded areas and small spaces</li>
+          </ul>
+          <a href="contact.html" class="btn btn--primary">Get a Quote <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="service-detail reveal" id="turfing">
+        <div class="service-detail__img">
+          <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?w=900&q=80&auto=format&fit=crop" alt="Fresh turfing with clean edges in a Surrey garden" loading="lazy">
+        </div>
+        <div class="service-detail__content">
+          <p class="eyebrow">Lawns</p>
+          <h2>Turfing</h2>
+          <p>Premium turf on properly prepared and graded topsoil. Strip, rotovate, level, compact and lay — with clean steel or block edges for a finish that establishes quickly and stays lush through the seasons.</p>
+          <ul class="service-includes">
+            <li>Old lawn and root removal from site</li>
+            <li>Topsoil import, grading and compaction</li>
+            <li>Hardwearing turf suited to Surrey conditions</li>
+            <li>Laser-level finish with correct drainage falls</li>
+            <li>Aftercare guide: watering, first cut and feeding</li>
+          </ul>
+          <a href="contact.html" class="btn btn--primary">Get a Quote <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="service-detail reveal" id="brickworks">
+        <div class="service-detail__img">
+          <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=900&q=80&auto=format&fit=crop" alt="Brick garden wall and steps in Surrey" loading="lazy">
+        </div>
+        <div class="service-detail__content">
+          <p class="eyebrow">Structure</p>
+          <h2>Brickworks</h2>
+          <p>Garden walls, raised planters, steps and detail brickwork that ties the whole layout together. Built on proper concrete strip footings so structures stay plumb and stable for decades.</p>
+          <ul class="service-includes">
+            <li>Retaining and garden walls in brick or block</li>
+            <li>Raised planters and vegetable beds</li>
+            <li>Steps with matching brick or stone treads</li>
+            <li>Pillars, piers and decorative detailing</li>
+            <li>Repointing and repairs to existing brickwork</li>
+          </ul>
+          <a href="contact.html" class="btn btn--primary">Get a Quote <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="service-detail reveal" id="groundworks">
+        <div class="service-detail__img">
+          <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=900&q=80&auto=format&fit=crop" alt="Groundworks excavation and levelling in Surrey" loading="lazy">
+        </div>
+        <div class="service-detail__content">
+          <p class="eyebrow">Foundations</p>
+          <h2>Groundworks</h2>
+          <p>Excavation, levelling, sub-base installation and drainage to keep all your surfaces performing long-term. Compact machines work through narrow access; laser levels ensure correct falls throughout.</p>
+          <ul class="service-includes">
+            <li>Excavation and bulk dig-out</li>
+            <li>Levelling, grading and compaction</li>
+            <li>Type 1 sub-base and sharp sand bed installation</li>
+            <li>Channel drains, soakaways and gullies</li>
+            <li>Underground cable and service awareness</li>
+          </ul>
+          <a href="contact.html" class="btn btn--primary">Get a Quote <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <!-- GARDENING -->
+      <div style="padding-top:var(--sp-16);border-top:1px solid var(--border);margin-top:var(--sp-8);">
+        <p class="eyebrow">Soft Landscaping &amp; Care</p>
+        <h2 style="font-size:var(--sz-3xl);margin-bottom:0;">Gardening Services</h2>
+      </div>
+
+      <article class="service-detail reveal" id="maintenance">
+        <div class="service-detail__img">
+          <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=900&q=80&auto=format&fit=crop" alt="Garden maintenance team in Surrey garden" loading="lazy">
+        </div>
+        <div class="service-detail__content">
+          <p class="eyebrow">Ongoing Care</p>
+          <h2>Garden Maintenance</h2>
+          <p>Reliable weekly, fortnightly or seasonal garden care — mowing, strimming, edging, weeding, pruning and seasonal tidy-ups. Green waste removed at every visit. You get clear notes on what was done and what's next.</p>
+          <ul class="service-includes">
+            <li>Lawn mowing, strimming and edging</li>
+            <li>Border weeding, mulching and bed care</li>
+            <li>Seasonal pruning and deadheading</li>
+            <li>Leaf clearance and waste removal</li>
+            <li>Flexible weekly or fortnightly scheduling</li>
+          </ul>
+          <a href="contact.html" class="btn btn--primary">Get a Quote <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="service-detail reveal" id="hedge-cutting">
+        <div class="service-detail__img">
+          <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=900&q=80&auto=format&fit=crop" alt="Professional hedge cutting in Surrey" loading="lazy">
+        </div>
+        <div class="service-detail__content">
+          <p class="eyebrow">Neat Lines</p>
+          <h2>Hedge Cutting</h2>
+          <p>Clean, precise trimming for all hedge types — from small garden boundaries to large established hedgerows. Correct seasonal timing to protect nesting birds and encourage dense regrowth.</p>
+          <ul class="service-includes">
+            <li>Box, yew, laurel, leylandii and mixed hedges</li>
+            <li>Height reduction and width control</li>
+            <li>Topiary and shaped hedge maintenance</li>
+            <li>All arisings cleared and removed from site</li>
+            <li>One-off and regular scheduled visits</li>
+          </ul>
+          <a href="contact.html" class="btn btn--primary">Get a Quote <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="service-detail reveal" id="lawn-mowing">
+        <div class="service-detail__img">
+          <img src="https://images.unsplash.com/photo-1525498128493-380d1990a112?w=900&q=80&auto=format&fit=crop" alt="Neat lawn mowing with stripes in Surrey" loading="lazy">
+        </div>
+        <div class="service-detail__content">
+          <p class="eyebrow">Regular</p>
+          <h2>Lawn Mowing</h2>
+          <p>Scheduled mowing at the right height for the season — crisp edges, clean stripes and a consistent, tidy look. We adapt frequency as growth dictates and notify you if we spot anything that needs attention.</p>
+          <ul class="service-includes">
+            <li>Weekly or fortnightly visits on a set day</li>
+            <li>Cutting height adjusted for season and conditions</li>
+            <li>Strimming around edges, trees and beds</li>
+            <li>Path and step blowing at each visit</li>
+            <li>Grass clippings removed or mulched on request</li>
+          </ul>
+          <a href="contact.html" class="btn btn--primary">Get a Quote <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="service-detail reveal" id="lawn-care">
+        <div class="service-detail__img">
+          <img src="https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?w=900&q=80&auto=format&fit=crop" alt="Lawn care aeration and treatment in Surrey" loading="lazy">
+        </div>
+        <div class="service-detail__content">
+          <p class="eyebrow">Health</p>
+          <h2>Lawn Care</h2>
+          <p>Deeper treatment to restore or maintain a thick, green, resilient lawn. Designed around Surrey's compacted clay soils and heavy rainfall — the conditions that cause most lawn problems.</p>
+          <ul class="service-includes">
+            <li>Hollow-tine aeration for compaction relief</li>
+            <li>Scarifying and thatch removal</li>
+            <li>Overseeding bare and thin patches</li>
+            <li>Seasonal granular and liquid feed programmes</li>
+            <li>Moss control and selective weed treatments</li>
+          </ul>
+          <a href="contact.html" class="btn btn--primary">Get a Quote <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="service-detail reveal" id="tree-surgeon">
+        <div class="service-detail__img">
+          <img src="https://images.unsplash.com/photo-1576091358783-a212ec293e37?w=900&q=80&auto=format&fit=crop" alt="Tree surgeon at work in a Surrey garden" loading="lazy">
+        </div>
+        <div class="service-detail__content">
+          <p class="eyebrow">Trees</p>
+          <h2>Tree Surgeon</h2>
+          <p>Crown care, deadwood removal, shaping and reduction to protect your home, improve light and keep trees safe and healthy for years. Structured seasonal pruning for long-term tree health.</p>
+          <ul class="service-includes">
+            <li>Crown reduction, thinning and lifting</li>
+            <li>Deadwood and hazard removal</li>
+            <li>Shaping and formative pruning</li>
+            <li>Stump treatment on request</li>
+            <li>All arisings chipped and removed</li>
+          </ul>
+          <a href="contact.html" class="btn btn--primary">Get a Quote <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="service-detail reveal" id="planting">
+        <div class="service-detail__img">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=900&q=80&auto=format&fit=crop" alt="Planting design and installation in Surrey garden" loading="lazy">
+        </div>
+        <div class="service-detail__content">
+          <p class="eyebrow">Planting</p>
+          <h2>Planting</h2>
+          <p>Design, planting and aftercare for borders, privacy hedges, specimen trees and seasonal beds — every scheme planned around your Surrey soil type, sun exposure and maintenance preference.</p>
+          <ul class="service-includes">
+            <li>Mixed shrub and perennial border design and installation</li>
+            <li>Privacy hedging and screening planting</li>
+            <li>Feature trees and specimen plants</li>
+            <li>Seasonal colour planting and annual bed changes</li>
+            <li>Soil conditioning, mulching and aftercare guidance</li>
+          </ul>
+          <a href="contact.html" class="btn btn--primary">Get a Quote <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+    </main>
+  </div>
+</div>
+
+<!-- CTA Banner -->
+<section class="cta-banner" style="margin-top:0;">
+  <div class="container">
+    <div class="cta-banner__inner">
+      <div>
+        <p class="eyebrow" style="color:var(--stone);">Get Started</p>
+        <h2 class="cta-banner__title">Not Sure Which Service You Need?</h2>
+        <p class="cta-banner__sub">Call us and we'll advise you — free of charge, no obligation.</p>
+      </div>
+      <div class="cta-banner__actions">
+        <a href="tel:07471734798" class="cta-banner__phone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.0 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          07471 734798
+        </a>
+        <a href="contact.html" class="btn btn--stone btn--lg">Free Quote <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo">
+          <div class="nav__logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" color="#C4A882">
+              <path d="M12 2a10 10 0 0 1 10 10c0 4-2 7-5 9"/>
+              <path d="M12 2C8 6 6 10 7 14c1 3 3 5 5 8"/>
+              <path d="M12 2c4 4 6 8 5 12-1 3-3 5-5 8"/>
+            </svg>
+          </div>
+          <span>Best Landscape<br><span style="color:var(--stone);">&amp; Gardening</span></span>
+        </a>
+        <p class="footer__tagline">Design · Build · Maintain. Serving Surrey since 2014.</p>
+      </div>
+      <div class="footer__col">
+        <h5>Landscaping</h5>
+        <a href="#patios"           class="footer__link">Driveways &amp; Patios</a>
+        <a href="#decking"          class="footer__link">Decking</a>
+        <a href="#fencing"          class="footer__link">Fencing &amp; Gates</a>
+        <a href="#turfing"          class="footer__link">Turfing</a>
+        <a href="#artificial-grass" class="footer__link">Artificial Grass</a>
+        <a href="#brickworks"       class="footer__link">Brickworks</a>
+        <a href="#groundworks"      class="footer__link">Groundworks</a>
+      </div>
+      <div class="footer__col">
+        <h5>Gardening</h5>
+        <a href="#maintenance"   class="footer__link">Garden Maintenance</a>
+        <a href="#hedge-cutting" class="footer__link">Hedge Cutting</a>
+        <a href="#lawn-mowing"   class="footer__link">Lawn Mowing</a>
+        <a href="#lawn-care"     class="footer__link">Lawn Care</a>
+        <a href="#tree-surgeon"  class="footer__link">Tree Surgeon</a>
+        <a href="#planting"      class="footer__link">Planting</a>
+      </div>
+      <div class="footer__col">
+        <h5>Contact</h5>
+        <div class="footer__contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.0 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <span><a href="tel:07471734798">07471 734798</a></span>
+        </div>
+        <div class="footer__contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span><a href="mailto:contact@bestlandscape.co.uk">contact@bestlandscape.co.uk</a></span>
+        </div>
+        <div style="margin-top:1.25rem;">
+          <a href="contact.html" class="btn btn--stone btn--sm">Free Quote →</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2024 Best Landscape &amp; Gardening Surrey. All rights reserved.</p>
+      <div class="footer__trust">
+        <span>⭐ Yell.com 5-Star</span>
+        <span>✓ Checkatrade</span>
+        <span>🔒 Fully Insured</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  /* Highlight active side nav link on scroll */
+  const sections = document.querySelectorAll('.service-detail[id]');
+  const navLinks  = document.querySelectorAll('.services-sidenav a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.services-sidenav a[href="#${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
